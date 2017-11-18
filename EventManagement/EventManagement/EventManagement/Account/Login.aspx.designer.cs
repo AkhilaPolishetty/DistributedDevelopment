@@ -40,13 +40,13 @@ namespace EventManagement.Account {
         protected global::System.Web.UI.WebControls.Literal FailureText;
         
         /// <summary>
-        /// UserName control.
+        /// userEmail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox UserName;
+        protected global::System.Web.UI.WebControls.TextBox userEmail;
         
         /// <summary>
         /// Password control.

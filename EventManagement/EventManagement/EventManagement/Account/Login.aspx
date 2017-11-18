@@ -13,11 +13,11 @@
                         </p>
                     </asp:PlaceHolder>
                     <div class="form-group">
-                        <asp:Label runat="server" AssociatedControlID="UserName" CssClass="col-md-2 control-label">UserName</asp:Label>
+                        <asp:Label runat="server" AssociatedControlID="userEmail" CssClass="col-md-2 control-label">UserEmail</asp:Label>
                         <div class="col-md-10">
-                            <asp:TextBox runat="server" ID="UserName" CssClass="form-control" />
-                            <asp:RequiredFieldValidator runat="server" ControlToValidate="UserName"
-                                CssClass="text-danger" ErrorMessage="The user name field is required." />
+                            <asp:TextBox runat="server" ID="userEmail" CssClass="form-control" TextMode="Email"/>
+                            <asp:RequiredFieldValidator runat="server" ControlToValidate="userEmail"
+                                CssClass="text-danger" ErrorMessage="The user email field is required." />
                         </div>
                     </div>
                     <div class="form-group">

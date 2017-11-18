@@ -44,10 +44,10 @@ namespace EventManagement.Account
 
         protected void LogIn(object sender, EventArgs e)
         {
-            if (!String.IsNullOrWhiteSpace(UserName.Text) && !String.IsNullOrWhiteSpace(Password.Text)) 
+            if (!String.IsNullOrWhiteSpace(userEmail.Text) && !String.IsNullOrWhiteSpace(Password.Text)) 
             {
                 HttpCookie CookieVar = new HttpCookie("UserSessionCookie");
-                string sessionResult = accessingUser(UserName.Text, Password.Text);
+                string sessionResult = accessingUser(userEmail.Text, Password.Text);
                 String userRole = Request.QueryString["PageName"];
 
                 if (userRole != null)
@@ -56,7 +56,8 @@ namespace EventManagement.Account
                     {
                         if (sessionResult.Equals("Login successful"))
                         {
-                            CookieVar["UserSessionCookie"] = UserName.Text;
+                            CookieVar["UserSessionCookie"] = userEmail.Text;
+
                             CookieVar.Expires = DateTime.Now.AddMonths(6);
                             Response.Cookies.Add(CookieVar);
                             FormsAuthentication.SetAuthCookie(sessionResult, rememberme.Checked);
@@ -72,8 +73,8 @@ namespace EventManagement.Account
                     {
                         if (sessionResult.Equals("Login successful"))
                         {
-                            CookieVar["UserSessionCookie"] = UserName.Text;
-                            CookieVar.Expires = DateTime.Now.AddMonths(6);
+                            CookieVar["UserSessionCookie"] = userEmail.Text;
+                            CookieVar.Expires = DateTime.Now.AddMonths(1);
                             Response.Cookies.Add(CookieVar);
                             FormsAuthentication.SetAuthCookie(sessionResult, rememberme.Checked);
                             FormsAuthentication.RedirectFromLoginPage(sessionResult, rememberme.Checked);
@@ -95,7 +96,7 @@ namespace EventManagement.Account
         }
 
 
-        private string accessingUser(string UserName, string Password)
+        private string accessingUser(string userEmail, string Password)
         {
             string xmlfile_path="";
             string result = null;
@@ -133,12 +134,12 @@ namespace EventManagement.Account
                     XmlNodeList UserList = xn.SelectNodes("user");
                     foreach (XmlNode node in UserList)
                     {
-                        string username_fromxml = node["name"].InnerText.Trim().Replace("\r\n", string.Empty);
+                        string useremail_fromxml = node["email"].InnerText.Trim().Replace("\r\n", string.Empty);
                         string password_fromxml = node["password"].InnerText.Trim().Replace("\r\n", string.Empty);
                         string enabled_fromxml = node["enabled"].InnerText.Trim().Replace("\r\n", string.Empty);
                         string DecryptedPassword = Class1.Decrypt(password_fromxml);
 
-                        if (username_fromxml.Equals(UserName))
+                        if (useremail_fromxml.Equals(userEmail))
                         {
                             if (DecryptedPassword.Equals(Password))
                             {
