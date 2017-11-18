@@ -80,7 +80,7 @@
            </table>
            
 
-        <asp:Button ID="Button3" runat="server" Text="Subscribe !" OnClick="Button3_Click" /> <br />
+        <asp:Button ID="Button3" runat="server" Text="Subscribe !" OnClick="Subscribe_Click" /> <br />
 
        </asp:Panel>
 
@@ -92,7 +92,7 @@
              <h2>Events Subscribed</h2>
             <br />
  
-            <asp:Button ID="Button1" runat="server" Text="Click to Show" OnClick="Button1_Click" /><br /><br />
+            <asp:Button ID="Button1" runat="server" Text="Click to Show" OnClick="Show_events_subscribed" /><br /><br />
             <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
             
         </asp:Panel>
