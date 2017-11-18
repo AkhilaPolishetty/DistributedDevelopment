@@ -10,24 +10,24 @@
   </user>
   <user>
     <name>ravi</name>
-    <eventID>0</eventID>
     <enabled>true</enabled>
+    <eventID>0</eventID>
     <email>ravi@gmail.com</email>
     <password>65;0~63;52~6;21~64;43</password>
     <phone>7887887777</phone>
   </user>
   <user>
     <name>ravi</name>
+    <enabled>false</enabled>
     <eventID>0</eventID>
-    <enabled>true</enabled>
     <email>ravi2@gmail.com</email>
     <password>65;0~63;52~6;21~64;43</password>
     <phone>6767676677</phone>
   </user>
   <user>
     <name>newuser</name>
+    <enabled>false</enabled>
     <eventID>0</eventID>
-    <enabled>true</enabled>
     <email>newuser@gmail.com</email>
     <password>65;0~63;52~17;3~18;47~22;3~23</password>
     <phone>7857857777</phone>

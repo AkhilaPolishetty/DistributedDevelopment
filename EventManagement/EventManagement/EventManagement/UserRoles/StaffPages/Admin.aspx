@@ -23,7 +23,7 @@
         <h3>List of Events</h3>
         <br />
         <br />
-        <asp:Button ID="Button2" runat="server" Text="Show all Events" OnClientClick="return loadXMLDoc();" />
+        <asp:Button ID="Button2" runat="server" Text="Show all Events" OnClientClick="return loadXMLDoc();" OnClick="Button2_Click" />
         <asp:Table ID="Table1" runat="server"></asp:Table>
         <h2>Delete Events</h2>
         <br />
@@ -74,16 +74,9 @@
                 return false;
             }
             function myFunction(xml) {
-                //console.log('xml', xml);
-                //var xml = '<?xml version="1.0" encoding="utf- 8"?>< eventDetails ><event><eventID>1</eventID><data>Hey all. This is Event 1 !!!</data><date></date><time></time></event></eventDetails >';
-                //console.log('xml2', xml);
-                alert('44');
                 console.log('xml passed  ', xml);
-
-
                 var xmlDoc = xml.responseXML;
                 table = "<tr><th>Event Id    </th><th>Event    </th><th>Date          </th><th>Time</th></tr>";
-
                 console.log('tab ', table);
                 var x = xmlDoc.getElementsByTagName("event");
                 console.log('x', x);

@@ -146,8 +146,8 @@ namespace EventManagement.Account
                 XDocument doc = XDocument.Load(xmlfile_path);
                 XElement root = new XElement("user");
                 root.Add(new XElement("name", name));
-                root.Add(new XElement("eventID", 0));
                 root.Add(new XElement("enabled", "true"));
+                root.Add(new XElement("eventID", 0));
                 root.Add(new XElement("email", email));
                 string EncryptPassword = Class1.Encrypt(password);
                 root.Add(new XElement("password", EncryptPassword));

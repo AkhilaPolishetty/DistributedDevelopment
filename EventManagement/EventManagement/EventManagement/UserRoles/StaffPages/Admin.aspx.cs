@@ -41,7 +41,11 @@ namespace EventManagement.UserRoles.StaffPages
         {
 
             if (TextBox1.Text == "")
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Event Details empty')", true);
                 return;
+            }
+                
             //getEventID from last event in xml and increment it
             string eventID = "12", App_Data_Path;
             int eventIDCurrent = 12;
@@ -192,6 +196,7 @@ namespace EventManagement.UserRoles.StaffPages
             Response.Redirect("~/Default.aspx");
         }
 
+        
     }
 
 }
