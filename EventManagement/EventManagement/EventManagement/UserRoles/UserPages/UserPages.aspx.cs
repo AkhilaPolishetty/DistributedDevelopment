@@ -15,12 +15,17 @@ namespace EventManagement.UserRoles.UserPages
         protected void Page_Load(object sender, EventArgs e)
         {
             // Stop Caching in IE
-            Response.Cache.SetCacheability(System.Web.HttpCacheability.NoCache);
+            //Response.Cache.SetCacheability(System.Web.HttpCacheability.NoCache);
 
             // Stop Caching in Firefox
-            Response.Cache.SetNoStore();
+            //Response.Cache.SetNoStore();
             if (Session["SessionVar"] == null)
             {
+                // Stop Caching in IE
+                Response.Cache.SetCacheability(System.Web.HttpCacheability.NoCache);
+
+                // Stop Caching in Firefox
+                Response.Cache.SetNoStore();
                 Response.Redirect("~/Default.aspx");
             }
             HttpCookie CookieVar = Request.Cookies["UserSessionCookie"];
@@ -30,6 +35,11 @@ namespace EventManagement.UserRoles.UserPages
             }
             else
             {
+                // Stop Caching in IE
+                Response.Cache.SetCacheability(System.Web.HttpCacheability.NoCache);
+
+                // Stop Caching in Firefox
+                Response.Cache.SetNoStore();
                 ResultLogin.Text = "<h2>"+"Welcome " + CookieVar["UserSessionCookie"] + "!" + "</h2>";
             }
 

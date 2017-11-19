@@ -35,6 +35,7 @@ namespace EventManagement
             }
             else
             {
+                Session.Clear();
                 userRole = HttpUtility.UrlEncode("MemberLogin");
                 Response.Redirect("/Account/Login.aspx?PageName=" + userRole);
             }
@@ -60,6 +61,7 @@ namespace EventManagement
             }
             else
             {
+                Session.Clear();
                 userRole = HttpUtility.UrlEncode("MemberRegister");
                 Response.Redirect("/Account/Register.aspx?PageName=" + userRole);
             }
@@ -85,6 +87,7 @@ namespace EventManagement
             }
             else
             {
+                Session.Clear();
                 userRole = HttpUtility.UrlEncode("AdminLogin");
                 Response.Redirect("/Account/Login.aspx?PageName=" + userRole);
             }

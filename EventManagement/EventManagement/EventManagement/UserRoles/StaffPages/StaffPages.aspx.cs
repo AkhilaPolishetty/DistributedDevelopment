@@ -14,24 +14,31 @@ namespace EventManagement.UserRoles.StaffPages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Stop Caching in IE
-            Response.Cache.SetCacheability(System.Web.HttpCacheability.NoCache);
-
-            // Stop Caching in Firefox
-            Response.Cache.SetNoStore();
+            
 
             String userRole = Request.QueryString["PageName"];
             if (Session["SessionVar"] == null)
             {
+                // Stop Caching in IE
+                Response.Cache.SetCacheability(System.Web.HttpCacheability.NoCache);
+
+                // Stop Caching in Firefox
+                Response.Cache.SetNoStore();
                 Response.Redirect("~/Default.aspx");
             }
             HttpCookie CookieVar = Request.Cookies["UserSessionCookie"];
             if ((CookieVar == null) || (CookieVar["UserSessionCookie"] == "") && userRole.Contains("AdminFeed"))
             {
+                
                 ResultLoginAdmin.Text = "<h2>" + "Welcome Admin!";
             }
             else
             {
+                // Stop Caching in IE
+                Response.Cache.SetCacheability(System.Web.HttpCacheability.NoCache);
+
+                // Stop Caching in Firefox
+                Response.Cache.SetNoStore();
                 ResultLoginAdmin.Text = "<h2>" + "Welcome " + "Admin" + " " + CookieVar["UserSessionCookie"] + "!";
             }
 
@@ -199,6 +206,11 @@ namespace EventManagement.UserRoles.StaffPages
             Session["SessionVar"] = null;
             Session.Abandon();
             FormsAuthentication.SignOut();
+            //// Stop Caching in IE
+            //    Response.Cache.SetCacheability(System.Web.HttpCacheability.NoCache);
+
+            //    // Stop Caching in Firefox
+            //    Response.Cache.SetNoStore();
             Response.Redirect("~/Default.aspx");
         }
 
