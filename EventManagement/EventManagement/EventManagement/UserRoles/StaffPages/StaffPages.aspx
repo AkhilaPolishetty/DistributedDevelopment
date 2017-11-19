@@ -1,10 +1,28 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Admin.aspx.cs" Inherits="EventManagement.UserRoles.StaffPages.Admin" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="StaffPages.aspx.cs" Inherits="EventManagement.UserRoles.StaffPages.Admin" %>
 
 <%@ Register Src="~/UserControl/SemesterDetails.ascx" TagPrefix="cse" TagName="semester" %>
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <h1>Admin Event Handling</h1>
     <br />
+    <div>
     <asp:Label ID="ResultLoginAdmin" runat="server"></asp:Label>
+        </div>
+    <div >
+            <section id="socialLoginForm">
+                <cse:semester runat="server" ID="SemesterDetailsFragmentLogin" />
+            </section>
+        </div>
+     <br />
+    <div >
+       
+    <p><b>Provider:</b> Ravi Teja Pinnaka<br />
+                <b>Functionality Name:</b> Admin Login page with the abilities to Create Events, Delete Events, Enable and Disable Admins<br />
+                <b>Input:</b> Admin Login Details like Username and Password<br />
+                <b>Output:</b>  Creation of events, editing and managing the users on the application <br />
+                <b>Functionality Description:</b> Admin Login page with the abilities to Create Events, Delete Events, Enable and Disable Admins <br/>
+          It uses XML manipulation to store results in the user/staff XML file <br /><br /><br />
+            </p>
+        </div>
     <asp:Panel ID="Panel1" runat="server">
         <h3>Add Event</h3>
         <br />
@@ -23,8 +41,9 @@
         <h3>List of Events</h3>
         <br />
         <br />
-        <asp:Button ID="Button2" runat="server" Text="Show all Events" OnClientClick="return loadXMLDoc();" OnClick="Button2_Click" />
-        <asp:Table ID="Table1" runat="server"></asp:Table>
+        <asp:Button ID="Button2" runat="server" Text="Show all Events" OnClientClick="return loadXMLDoc();"/>
+        <asp:Table ID="Table1" runat="server" BackColor="White" BorderColor="Black" 
+    BorderWidth="1" ForeColor="Black" GridLines="Both" BorderStyle="Solid"></asp:Table>
         <h2>Delete Events</h2>
         <br />
         <br />
@@ -38,17 +57,26 @@
         <br />
         <asp:Button ID="Button5" runat="server" Text="Show all users" OnClientClick="return puttext();" />
 
-        <asp:Table ID="Table2" runat="server"></asp:Table>
+        <asp:Table ID="Table2" runat="server" BackColor="White" BorderColor="Black" 
+    BorderWidth="1" ForeColor="Black" GridLines="Both" BorderStyle="Solid"></asp:Table>
 
         <br />
         <br />
-        <h2>Disable Clients</h2>
+        <h2>Disable/Enable Clients</h2>
         <br />
         <br />
-        Enter user email to delete
+        Enter user email to disable
         <asp:TextBox ID="TextBox3" runat="server"></asp:TextBox><br />
         <br />
         <asp:Button ID="Button4" runat="server" Text="Disable Client" OnClick="Button4_Click" />
+        <br />
+        <br />
+        Enter user email to re-enable
+        <asp:TextBox ID="TextBox4" runat="server"></asp:TextBox>
+        <br />
+        <br />
+
+        <asp:Button ID="Button6" runat="server" Text="Re-enable Client" OnClick="Button6_Click" />
         <script>
             function loadXMLDoc() {
                 var xmlhttp = new XMLHttpRequest();
@@ -76,7 +104,7 @@
             function myFunction(xml) {
                 console.log('xml passed  ', xml);
                 var xmlDoc = xml.responseXML;
-                table = "<tr><th>Event Id    </th><th>Event    </th><th>Date          </th><th>Time</th></tr>";
+                table = "<tr style='border: 2px;padding : 2px'><th>Event Id    </th><th>Event    </th><th>Date          </th><th>Time</th></tr>";
                 console.log('tab ', table);
                 var x = xmlDoc.getElementsByTagName("event");
                 console.log('x', x);
@@ -99,6 +127,7 @@
                     //alert('end',x[1].getElementsByTagName("data")[0].childNodes[0].nodeValue);
                 }
                 console.log('tab ' + table);
+                table += " <style> table, th, td {  border: 1px solid black;} </style>";
 
                 document.getElementById('<%= Table1.ClientID %>').innerHTML = table;
 
@@ -150,15 +179,25 @@
             }
 
         </script>
-
+        <br />
+        <br />
+        <div class="form-group">
+            <p ><b>Provider:</b> Akhila<br />
+                <b>Functionality Name:</b> Add Another Admin<br />
+                <b>Functionality Description:</b> This button lets as admin only to add another admin to the staff xml file<br /><br /><br />
+            </p>
+            </div>
+        
+        <div class="col-md-4">
+            <asp:Button runat="server" OnClick="AddAnotherAdmin_Click" Text="Click to add another Admin" CssClass="btn btn-default" />
+        </div>
+           <br />
+        <br />
+        
         <div class="col-md-4">
             <asp:Button runat="server" OnClick="LogOut" Text="Log Out" CssClass="btn btn-default" />
         </div>
-        <div class="col-md-4">
-            <section id="socialLoginForm">
-                <cse:semester runat="server" ID="SemesterDetailsFragmentLogin" />
-            </section>
-        </div>
+        
 
     </asp:Panel>
 

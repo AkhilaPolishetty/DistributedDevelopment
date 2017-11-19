@@ -2,9 +2,8 @@
 <wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Service1" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
-      <xsd:import schemaLocation="http://localhost:51192/Service1.svc?xsd=xsd0" namespace="http://tempuri.org/" />
-      <xsd:import schemaLocation="http://localhost:51192/Service1.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="http://localhost:51192/Service1.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/LoginAndSMS" />
+      <xsd:import schemaLocation="http://webstrar21.fulton.asu.edu/Page2/Service1.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://webstrar21.fulton.asu.edu/Page2/Service1.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IService1_GetData_InputMessage">
@@ -13,30 +12,30 @@
   <wsdl:message name="IService1_GetData_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetDataResponse" />
   </wsdl:message>
-  <wsdl:message name="IService1_GetDataUsingDataContract_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetDataUsingDataContract" />
+  <wsdl:message name="IService1_Top10Words_InputMessage">
+    <wsdl:part name="parameters" element="tns:Top10Words" />
   </wsdl:message>
-  <wsdl:message name="IService1_GetDataUsingDataContract_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetDataUsingDataContractResponse" />
+  <wsdl:message name="IService1_Top10Words_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Top10WordsResponse" />
   </wsdl:message>
-  <wsdl:message name="IService1_SMSservice_InputMessage">
-    <wsdl:part name="parameters" element="tns:SMSservice" />
+  <wsdl:message name="IService1_RemoveStopWords_InputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveStopWords" />
   </wsdl:message>
-  <wsdl:message name="IService1_SMSservice_OutputMessage">
-    <wsdl:part name="parameters" element="tns:SMSserviceResponse" />
+  <wsdl:message name="IService1_RemoveStopWords_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveStopWordsResponse" />
   </wsdl:message>
   <wsdl:portType name="IService1">
     <wsdl:operation name="GetData">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetData" message="tns:IService1_GetData_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetDataResponse" message="tns:IService1_GetData_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetDataUsingDataContract">
-      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetDataUsingDataContract" message="tns:IService1_GetDataUsingDataContract_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetDataUsingDataContractResponse" message="tns:IService1_GetDataUsingDataContract_OutputMessage" />
+    <wsdl:operation name="Top10Words">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/Top10Words" message="tns:IService1_Top10Words_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/Top10WordsResponse" message="tns:IService1_Top10Words_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="SMSservice">
-      <wsdl:input wsaw:Action="http://tempuri.org/IService1/SMSservice" message="tns:IService1_SMSservice_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IService1/SMSserviceResponse" message="tns:IService1_SMSservice_OutputMessage" />
+    <wsdl:operation name="RemoveStopWords">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/RemoveStopWords" message="tns:IService1_RemoveStopWords_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/RemoveStopWordsResponse" message="tns:IService1_RemoveStopWords_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IService1" type="tns:IService1">
@@ -50,8 +49,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetDataUsingDataContract">
-      <soap:operation soapAction="http://tempuri.org/IService1/GetDataUsingDataContract" style="document" />
+    <wsdl:operation name="Top10Words">
+      <soap:operation soapAction="http://tempuri.org/IService1/Top10Words" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -59,8 +58,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="SMSservice">
-      <soap:operation soapAction="http://tempuri.org/IService1/SMSservice" style="document" />
+    <wsdl:operation name="RemoveStopWords">
+      <soap:operation soapAction="http://tempuri.org/IService1/RemoveStopWords" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -71,7 +70,7 @@
   </wsdl:binding>
   <wsdl:service name="Service1">
     <wsdl:port name="BasicHttpBinding_IService1" binding="tns:BasicHttpBinding_IService1">
-      <soap:address location="http://localhost:51192/Service1.svc" />
+      <soap:address location="http://webstrar21.fulton.asu.edu/Page2/Service1.svc" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

@@ -21,6 +21,7 @@ namespace EventManagement.Account
         protected void Page_Load(object sender, EventArgs e)
         {
 
+            //Obtaining the user role to Open specific page
             String userRole = Request.QueryString["PageName"];
             //RegisterHyperLink.NavigateUrl = "/Account/Register.aspx?PageName=" + "register";
 
@@ -139,6 +140,7 @@ namespace EventManagement.Account
             if (!repeatpassword_bool)
                 outputErrorMsg += "Passwords don't match ! \n";
 
+           /// bool newAdmin = IsEnteredAdminNew(email);
             //captcha_bool = true; //temp change this
             if (email_bool && phone_bool && password_bool && repeatpassword_bool && !emailExists && IsCaptchaValid)
             {
@@ -169,7 +171,56 @@ namespace EventManagement.Account
                 ResultRegister.Text = outputErrorMsg;
             }
         }
-    
+
+        //public bool IsEnteredAdminNew(string email)
+        //{
+        //    String xmlfile_path = "";
+        //    bool flag = true;
+        //    String userRole = Request.QueryString["PageName"];
+        //    string App_Data_Path = Path.Combine(HttpRuntime.AppDomainAppPath, @"XMLFiles");
+
+        //    if (userRole.Contains("MemberRegister"))
+        //    {
+        //        Session.Remove("SessionVar");
+        //        Session.Add("SessionVar", "MemberRegister");
+        //        xmlfile_path = Path.Combine(App_Data_Path, @"staff.xml");
+        //    }
+        //    else if (userRole.Contains("AdminRegister"))
+        //    {
+        //        Session.Remove("SessionVar");
+        //        Session.Add("SessionVar", "AdminRegister");
+        //        xmlfile_path = Path.Combine(App_Data_Path, @"user.xml");
+        //    }
+        //    else
+        //    {
+        //        Session.Remove("SessionVar");
+        //        Session.Add("SessionVar", "AdminRegister");
+        //        xmlfile_path = Path.Combine(App_Data_Path, @"user.xml");
+        //    }
+
+        //    if (File.Exists(xmlfile_path))
+        //    {
+        //        XmlDocument xmldoc = new XmlDocument();
+        //        xmldoc.Load(xmlfile_path);
+
+        //        XmlNodeList xnList = xmldoc.SelectNodes("/UserDetails");
+        //        foreach (XmlNode xn in xnList)
+        //        {
+        //            XmlNodeList CNodes = xn.SelectNodes("user");
+        //            foreach (XmlNode node in CNodes)
+        //            {
+        //                string email_db = node["email"].InnerText.Trim().Replace("\r\n", string.Empty);
+        //                if (email_db == email)
+        //                {
+        //                    flag = false;
+        //                    break;
+        //                }
+        //            }
+        //        }
+        //    }
+
+        //    return flag;
+        //}
 
         public string getSession()
         {
@@ -178,6 +229,8 @@ namespace EventManagement.Account
             String userRole = Request.QueryString["PageName"];
             string App_Data_Path = Path.Combine(HttpRuntime.AppDomainAppPath, @"XMLFiles");
 
+
+            //Checking the user role to obtain  the xml file path specific to the user
             if (userRole.Contains("MemberRegister"))
             {
                 Session.Remove("SessionVar");
@@ -227,6 +280,9 @@ namespace EventManagement.Account
             return result;
         }
     }
+
+
+    //Recaptcha class for the image verifier service
 
     class ReCaptchaClass
     {

@@ -16,12 +16,13 @@ namespace EventManagement
             // Code that runs on application startup
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            //Storing the details of the Admin
             Application["AdminDetails"] = null;
         }
         void Application_BeginRequest(Object Sender, EventArgs e)
         {
             Application.Lock();
-            Application["AdminDetailsUser"] = "TA";
+            Application["AdminDetailsUser"] = "TA@asu.edu";
             Application["AdminDetailsUserPassword"] = "Cse445ta!";
             Application.UnLock();
          }

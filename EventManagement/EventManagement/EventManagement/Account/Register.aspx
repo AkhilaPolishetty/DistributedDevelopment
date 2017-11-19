@@ -12,7 +12,16 @@
         <h4>Create a new account</h4>
         <hr />
         <asp:ValidationSummary runat="server" CssClass="text-danger" />
-        <div class="form-group">
+        <div class="form-group">  
+             <p><b>Provider:</b> Akhila<br />
+                <b>Functionality Name:</b> Register Page with form validation<br />
+                <b>Input:</b>Name, email, phone number,  password, re-captcha<br />
+                <b>Output:</b>  Including the entry in database (XML file)<br />
+                <b>Functionality Description:</b> >Service is used to validate the forms entered by user while registering and has a recaptcha(Image Service) to verifies if the user is human.<br /> It only
+          allows the user to register on entering a unique mail ID. <br/>
+          It uses XML manipulation to store results in the user/staff XML file <br /><br /><br />
+            </p>
+
             <asp:Label runat="server" AssociatedControlID="UserName" CssClass="col-md-2 control-label">Name</asp:Label>
             <div class="col-md-10">
                 <asp:TextBox runat="server" ID="UserName" CssClass="form-control"  />
@@ -77,6 +86,11 @@
             </div>
         </div>
     </div>
+     
+     <p><b>Provider:</b> Akhila<br />
+        <b>Functionality Name:</b> User control<br />
+        <b>Functionality Description:</b> User control is implemented to add a footer to every page about which semster and which  course this assignment is related to<br />
+      </p>
     <div class="col-md-4">
             <section id="socialLoginForm">
                 <cse:semester runat="server" id="SemesterDetailsFragment" />

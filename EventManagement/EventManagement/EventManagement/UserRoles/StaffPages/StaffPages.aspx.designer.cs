@@ -22,6 +22,15 @@ namespace EventManagement.UserRoles.StaffPages {
         protected global::System.Web.UI.WebControls.Label ResultLoginAdmin;
         
         /// <summary>
+        /// SemesterDetailsFragmentLogin control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::EventManagement.UserControl.SemesterDetails SemesterDetailsFragmentLogin;
+        
+        /// <summary>
         /// Panel1 control.
         /// </summary>
         /// <remarks>
@@ -139,12 +148,21 @@ namespace EventManagement.UserRoles.StaffPages {
         protected global::System.Web.UI.WebControls.Button Button4;
         
         /// <summary>
-        /// SemesterDetailsFragmentLogin control.
+        /// TextBox4 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::EventManagement.UserControl.SemesterDetails SemesterDetailsFragmentLogin;
+        protected global::System.Web.UI.WebControls.TextBox TextBox4;
+        
+        /// <summary>
+        /// Button6 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button6;
     }
 }

@@ -16,19 +16,21 @@ namespace EventManagement
 
         protected void LoginUser_Click(object sender, EventArgs e)
         {
+            //checking if the session variables are empty or not
             string userRole = "";
             if (Session["SessionVar"] != null)
             {
                 String sessionStr = Session["SessionVar"].ToString();
                 if (sessionStr.Equals("MemberLogin"))
                 {
+                    //Redirecting directly to the login page if the session variable is not empty
                    // userRole = HttpUtility.UrlEncode("MemberLogin");
                     Response.Redirect("UserRoles/UserPages/UserPages.aspx");
                 }
                 else
                 {
-                    Response.Write("Check your internet connection");
-                    Response.Redirect("~/default.aspx");
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessageOnAdminClick", "alert('First logout of admin page to log into member page')", true);
+                    //Response.Redirect("~/default.aspx");
                 }
             }
             else
@@ -38,6 +40,7 @@ namespace EventManagement
             }
         }
 
+        //For user registration
         protected void CreateUser_Click(object sender, EventArgs e)
         {
             string userRole = "";
@@ -62,6 +65,7 @@ namespace EventManagement
             }
         }
 
+        //For admin login
         protected void LoginAdmin_Click(object sender, EventArgs e)
         {
             string userRole = "";
@@ -71,12 +75,12 @@ namespace EventManagement
                 if (sessionStr.Equals("AdminLogin"))
                 {
                     userRole = HttpUtility.UrlEncode("AdminLogin");
-                    Response.Redirect("/Account/Login.aspx?PageName=" + userRole);
+                    Response.Redirect("UserRoles/StaffPages/StaffPages.aspx?PageName=" + userRole);
                 }
                 else
                 {
-                    Response.Write("Check your internet connection");
-                    Response.Redirect("~/default.aspx");
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessageOnMemeberClick", "alert('First logout of member page to log into admin page')", true);
+                    //Response.Redirect("~/default.aspx");
                 }
             }
             else

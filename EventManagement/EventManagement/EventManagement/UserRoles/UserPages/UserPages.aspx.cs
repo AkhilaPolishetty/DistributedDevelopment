@@ -30,7 +30,7 @@ namespace EventManagement.UserRoles.UserPages
             }
             else
             {
-                ResultLogin.Text = "Welcome " + CookieVar["UserSessionCookie"] + "!";
+                ResultLogin.Text = "<h2>"+"Welcome " + CookieVar["UserSessionCookie"] + "!" + "</h2>";
             }
 
         }
@@ -39,6 +39,7 @@ namespace EventManagement.UserRoles.UserPages
 
         protected void LogOut(object sender, EventArgs e)
         {
+            //Loggin the user out and deleting users session variables 
             if (Request.Cookies["UserSessionCookie"] != null)
             {
                 HttpCookie CookieKill = new HttpCookie("UserSessionCookie");
@@ -53,6 +54,8 @@ namespace EventManagement.UserRoles.UserPages
 
         protected void Subscribe_Click(object sender, EventArgs e)
         {
+
+            //If the user wants to subscribe to an event 
             HttpCookie CookieVar = Request.Cookies["UserSessionCookie"];
             string message = "";
             string usermail = CookieVar["UserSessionCookie"];
@@ -68,6 +71,7 @@ namespace EventManagement.UserRoles.UserPages
             bool exists = false;
             try
             {
+                //Get the data of the events to add it to users list
                 App_Data_Path = Path.Combine(HttpRuntime.AppDomainAppPath, @"XMLFiles");
                 string xmlfile_path = Path.Combine(App_Data_Path, @"events.xml");
                 if (File.Exists(xmlfile_path))
@@ -107,10 +111,14 @@ namespace EventManagement.UserRoles.UserPages
         }
         void subscribeEvent(string message)
         {
-            SMSReference.Service1Client obj = new SMSReference.Service1Client();
+            //SMS service reference object to send message to the user once he subscribes to the event 
+            SMSServiceReference.Service1Client obj = new SMSServiceReference.Service1Client();
             HttpCookie CookieVar = Request.Cookies["UserSessionCookie"];
             string usermail = CookieVar["UserSessionCookie"], App_Data_Path;
-            string subject = "Event Subscribed on Event Board";
+            string subject = SubjectBox.Text;
+            //Removing stop words from subject to give a crisper text
+            WordFilterServiceReference.Service1Client serv = new WordFilterServiceReference.Service1Client();
+            string clearSubject = serv.RemoveStopWords(subject);
 
             long mobileNumber = 0;
             string gateWay = DropDownList1.SelectedItem.Value; 
@@ -130,16 +138,32 @@ namespace EventManagement.UserRoles.UserPages
                         {
                             if (usermail == node["email"].InnerText.Trim().Replace("\r\n", string.Empty))
                             {
-                                node["eventID"].InnerText += "," + TextBox1.Text;
-                                xmldoc.Save(Path.Combine(App_Data_Path, @"users.xml"));
-                                if (!String.IsNullOrWhiteSpace(gateWay))
+                                string[] split_ids = node["eventID"].InnerText.Trim().Replace("\r\n", string.Empty).Split(',');
+                                if (!split_ids.Contains(TextBox1.Text))
                                 {
-                                    mobileNumber = Convert.ToInt64(node["phone"].InnerText.Trim().Replace("\r\n", string.Empty));
-                                    string result = obj.SMSservice(subject, message, mobileNumber, gateWay);
-                                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Event Subscribed and message sent')", true);
+                                    node["eventID"].InnerText += "," + TextBox1.Text;
+                                    xmldoc.Save(Path.Combine(App_Data_Path, @"users.xml"));
+                                    //Checking if the gateway input is not null
+                                    if (!String.IsNullOrWhiteSpace(gateWay))
+                                    {
+                                        mobileNumber = Convert.ToInt64(node["phone"].InnerText.Trim().Replace("\r\n", string.Empty));
+                                        //Calling the SMS function with required details
+                                        string result = obj.SMSservice(clearSubject, message, mobileNumber, gateWay);
+                                        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Event Subscribed and message sent')", true);
+                                    }
+                                    else
+                                    {
+                                        //Not sending a message if the gateway is null
+                                        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Event Subscribed and but message not sent')", true);
+                                    }
+
+                                    break;
                                 }
-                               
-                                break;
+                                else
+                                {
+                                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Event Already Subscribed')", true);
+                                }
+                                
                             }
                         }
                     }
@@ -171,18 +195,20 @@ namespace EventManagement.UserRoles.UserPages
                     XmlDocument xmldoc = new XmlDocument();
                     xmldoc.Load(xmlfile_path);
                     XmlNodeList xnList = xmldoc.SelectNodes("/UserDetails");
-                    table = "<table><tr><th>Event Id    </th><th>Event    </th><th>Date          </th><th>Time</th></tr>";
+                    table = "<table style='border: 2px;padding : 2px' ><tr><th>Event Id    </th><th>Event    </th><th>Date          </th><th>Time</th></tr>";
                     foreach (XmlNode xn in xnList)
                     {
                         XmlNodeList CNodes = xn.SelectNodes("user");
                         
                         foreach (XmlNode node in CNodes)
                         {
+                            //If the users email matches 
                             if (usermail == node["email"].InnerText.Trim().Replace("\r\n", string.Empty))
                             {
                                 string[] eventids= node["eventID"].InnerText.Trim().Replace("\r\n", string.Empty).Split(',');
                                 if(node["eventID"].InnerText.Trim().Replace("\r\n", string.Empty) != "0")
                                 {
+                                    //For each of the users event IDs calling the getSubscribedEvents function to the event details from event XML
                                     foreach (String id in eventids)
                                         table += getSubscribedEvents(id, table);
                                 }
@@ -206,11 +232,12 @@ namespace EventManagement.UserRoles.UserPages
             }
             if (!flag)
             {
-                Label1.Text = table + "</table>";
+                Label1.Text = table + "</table>"+ "<style>table, th, td {    border: 1px solid black;}</ style > ";
             }
             
         }
 
+        //Getting the event details from event XML  for a particular user
         string getSubscribedEvents(string id,string table)
         {
             HttpCookie CookieVar = Request.Cookies["UserSessionCookie"];

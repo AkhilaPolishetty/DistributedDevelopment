@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EventManagement.SMSReference {
+namespace EventManagement.SMSServiceReference {
     using System.Runtime.Serialization;
     using System;
     
@@ -75,7 +75,7 @@ namespace EventManagement.SMSReference {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="SMSReference.IService1")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="SMSServiceReference.IService1")]
     public interface IService1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetData", ReplyAction="http://tempuri.org/IService1/GetDataResponse")]
@@ -85,10 +85,10 @@ namespace EventManagement.SMSReference {
         System.Threading.Tasks.Task<string> GetDataAsync(int value);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetDataUsingDataContract", ReplyAction="http://tempuri.org/IService1/GetDataUsingDataContractResponse")]
-        EventManagement.SMSReference.CompositeType GetDataUsingDataContract(EventManagement.SMSReference.CompositeType composite);
+        EventManagement.SMSServiceReference.CompositeType GetDataUsingDataContract(EventManagement.SMSServiceReference.CompositeType composite);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetDataUsingDataContract", ReplyAction="http://tempuri.org/IService1/GetDataUsingDataContractResponse")]
-        System.Threading.Tasks.Task<EventManagement.SMSReference.CompositeType> GetDataUsingDataContractAsync(EventManagement.SMSReference.CompositeType composite);
+        System.Threading.Tasks.Task<EventManagement.SMSServiceReference.CompositeType> GetDataUsingDataContractAsync(EventManagement.SMSServiceReference.CompositeType composite);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SMSservice", ReplyAction="http://tempuri.org/IService1/SMSserviceResponse")]
         string SMSservice(string subject, string message, long MobileNumber, string carrierGateway);
@@ -98,12 +98,12 @@ namespace EventManagement.SMSReference {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IService1Channel : EventManagement.SMSReference.IService1, System.ServiceModel.IClientChannel {
+    public interface IService1Channel : EventManagement.SMSServiceReference.IService1, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class Service1Client : System.ServiceModel.ClientBase<EventManagement.SMSReference.IService1>, EventManagement.SMSReference.IService1 {
+    public partial class Service1Client : System.ServiceModel.ClientBase<EventManagement.SMSServiceReference.IService1>, EventManagement.SMSServiceReference.IService1 {
         
         public Service1Client() {
         }
@@ -132,11 +132,11 @@ namespace EventManagement.SMSReference {
             return base.Channel.GetDataAsync(value);
         }
         
-        public EventManagement.SMSReference.CompositeType GetDataUsingDataContract(EventManagement.SMSReference.CompositeType composite) {
+        public EventManagement.SMSServiceReference.CompositeType GetDataUsingDataContract(EventManagement.SMSServiceReference.CompositeType composite) {
             return base.Channel.GetDataUsingDataContract(composite);
         }
         
-        public System.Threading.Tasks.Task<EventManagement.SMSReference.CompositeType> GetDataUsingDataContractAsync(EventManagement.SMSReference.CompositeType composite) {
+        public System.Threading.Tasks.Task<EventManagement.SMSServiceReference.CompositeType> GetDataUsingDataContractAsync(EventManagement.SMSServiceReference.CompositeType composite) {
             return base.Channel.GetDataUsingDataContractAsync(composite);
         }
         

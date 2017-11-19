@@ -191,12 +191,29 @@
     <Content Include="About.aspx" />
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\Register.aspx" />
-    <None Include="Connected Services\SMSReference\configuration91.svcinfo" />
-    <None Include="Connected Services\SMSReference\configuration.svcinfo" />
-    <Content Include="Connected Services\SMSReference\EventManagement.SMSReference.CompositeType.datasource">
+    <Content Include="Connected Services\SMSServiceReference\EventManagement.SMSServiceReference.CompositeType.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <None Include="Connected Services\SMSReference\Reference.svcmap">
+    <None Include="Connected Services\SMSServiceReference\Service1.wsdl" />
+    <None Include="Connected Services\SMSServiceReference\Service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\SMSServiceReference\Service11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\SMSServiceReference\Service12.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\WordFilterServiceReference\configuration91.svcinfo" />
+    <None Include="Connected Services\WordFilterServiceReference\configuration.svcinfo" />
+    <None Include="Connected Services\WordFilterServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\SMSServiceReference\Service1.disco" />
+    <None Include="Connected Services\SMSServiceReference\configuration91.svcinfo" />
+    <None Include="Connected Services\SMSServiceReference\configuration.svcinfo" />
+    <None Include="Connected Services\SMSServiceReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -211,14 +228,11 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="Connected Services\SMSReference\Service1.wsdl" />
-    <None Include="Connected Services\SMSReference\Service1.xsd">
+    <None Include="Connected Services\WordFilterServiceReference\Service1.wsdl" />
+    <None Include="Connected Services\WordFilterServiceReference\Service1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\SMSReference\Service11.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\SMSReference\Service12.xsd">
+    <None Include="Connected Services\WordFilterServiceReference\Service11.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -256,7 +270,7 @@
     <Content Include="Global.asax" />
     <Content Include="Site.Master" />
     <EmbeddedResource Include="UserControl\SemesterDetails.ascx" />
-    <Content Include="UserRoles\StaffPages\Admin.aspx" />
+    <Content Include="UserRoles\StaffPages\StaffPages.aspx" />
     <Content Include="UserRoles\UserPages\UserPages.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
@@ -298,7 +312,12 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Connected Services\SMSReference\Reference.cs">
+    <Compile Include="Connected Services\SMSServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\WordFilterServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -337,12 +356,12 @@
     <Compile Include="UserControl\SemesterDetails.ascx.designer.cs">
       <DependentUpon>SemesterDetails.ascx</DependentUpon>
     </Compile>
-    <Compile Include="UserRoles\StaffPages\Admin.aspx.cs">
-      <DependentUpon>Admin.aspx</DependentUpon>
+    <Compile Include="UserRoles\StaffPages\StaffPages.aspx.cs">
+      <DependentUpon>StaffPages.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="UserRoles\StaffPages\Admin.aspx.designer.cs">
-      <DependentUpon>Admin.aspx</DependentUpon>
+    <Compile Include="UserRoles\StaffPages\StaffPages.aspx.designer.cs">
+      <DependentUpon>StaffPages.aspx</DependentUpon>
     </Compile>
     <Compile Include="UserRoles\UserPages\UserPages.aspx.cs">
       <DependentUpon>UserPages.aspx</DependentUpon>
@@ -368,7 +387,8 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Connected Services\SMSReference\" />
+    <WCFMetadataStorage Include="Connected Services\SMSServiceReference\" />
+    <WCFMetadataStorage Include="Connected Services\WordFilterServiceReference\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

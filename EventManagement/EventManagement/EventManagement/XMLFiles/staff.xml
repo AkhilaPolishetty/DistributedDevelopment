@@ -16,5 +16,12 @@
     <password>52;64~19;67~66;66~3;18~28</password>
     <phone>1235678901</phone>
   </user>
-  
+  <user>
+    <name>AkhilaStaff</name>
+    <enabled>true</enabled>
+    <eventID>0</eventID>
+    <email>akhila@asu.edu</email>
+    <password>65;6~17;64~13;13~6;8~28</password>
+    <phone>6502009579</phone>
+  </user>
 </UserDetails>

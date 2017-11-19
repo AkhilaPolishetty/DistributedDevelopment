@@ -28,11 +28,11 @@ namespace EventManagement.UserRoles.StaffPages
             HttpCookie CookieVar = Request.Cookies["UserSessionCookie"];
             if ((CookieVar == null) || (CookieVar["UserSessionCookie"] == "") && userRole.Contains("AdminFeed"))
             {
-                ResultLoginAdmin.Text = "Welcome Admin!";
+                ResultLoginAdmin.Text = "<h2>" + "Welcome Admin!";
             }
             else
             {
-                ResultLoginAdmin.Text = "Welcome " + "Admin" + CookieVar["UserSessionCookie"] +"!";
+                ResultLoginAdmin.Text = "<h2>" + "Welcome " + "Admin" + " " + CookieVar["UserSessionCookie"] + "!";
             }
 
         }
@@ -45,14 +45,14 @@ namespace EventManagement.UserRoles.StaffPages
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Event Details empty')", true);
                 return;
             }
-                
+
             //getEventID from last event in xml and increment it
             string eventID = "12", App_Data_Path;
             int eventIDCurrent = 12;
             try
             {
 
-                App_Data_Path = Path.Combine(HttpRuntime.AppDomainAppPath,@"XMLFiles");
+                App_Data_Path = Path.Combine(HttpRuntime.AppDomainAppPath, @"XMLFiles");
                 string xmlfile_path = Path.Combine(App_Data_Path, @"events.xml");
                 if (File.Exists(xmlfile_path))
                 {
@@ -157,9 +157,15 @@ namespace EventManagement.UserRoles.StaffPages
                         XmlNodeList events = node.ChildNodes;
                         if (events.Item(3).InnerText.Equals(TextBox3.Text))
                         {
-                            events.Item(1).InnerText = "false";
-                            xmldoc.Save(Path.Combine(App_Data_Path, @"users.xml"));
-                            System.Web.UI.ScriptManager.RegisterStartupScript(this, GetType(), "clientdisabled", "alert('Member Disabled');", true);
+                            if (events.Item(1).InnerText == "false")
+                                System.Web.UI.ScriptManager.RegisterStartupScript(this, GetType(), "clientdisabled", "alert('Member Already Disabled');", true);
+                            else
+                            {
+                                events.Item(1).InnerText = "false";
+                                xmldoc.Save(Path.Combine(App_Data_Path, @"users.xml"));
+                                System.Web.UI.ScriptManager.RegisterStartupScript(this, GetType(), "clientdisabled", "alert('Member Disabled');", true);
+                            }
+
                             found = true;
                             break;
                         }
@@ -194,6 +200,84 @@ namespace EventManagement.UserRoles.StaffPages
             Session.Abandon();
             FormsAuthentication.SignOut();
             Response.Redirect("~/Default.aspx");
+        }
+
+        protected void AddAnotherAdmin_Click(object sender, EventArgs e)
+        {
+            string userRole = "";
+            if (Session["SessionVar"] != null)
+            {
+                String sessionStr = Session["SessionVar"].ToString();
+                if (sessionStr.Equals("AdminRegister"))
+                {
+                    userRole = HttpUtility.UrlEncode("AdminRegister");
+                    Response.Redirect("/Account/Register.aspx?PageName=" + userRole);
+                }
+                else
+                {
+                    userRole = HttpUtility.UrlEncode("AdminRegister");
+                    Response.Redirect("/Account/Register.aspx?PageName=" + userRole);
+                }
+            }
+            else
+            {
+                userRole = HttpUtility.UrlEncode("AdminRegister");
+                Response.Redirect("/Account/Register.aspx?PageName=" + userRole);
+            }
+
+        }
+
+        protected void Button6_Click(object sender, EventArgs e)
+        {
+            if (TextBox4.Text == "")
+                System.Web.UI.ScriptManager.RegisterStartupScript(this, GetType(), "enterID", "alert('Enter an event id');", true);
+            string App_Data_Path;
+            try
+            {
+                App_Data_Path = Path.Combine(HttpRuntime.AppDomainAppPath, @"XMLFiles");
+                string xmlfile_path = Path.Combine(App_Data_Path, @"users.xml");
+                XDocument doc = XDocument.Load(Path.Combine(App_Data_Path, @"users.xml"));
+                bool found = false;
+                if (File.Exists(xmlfile_path))
+                {
+                    XmlDocument xmldoc = new XmlDocument();
+                    xmldoc.Load(xmlfile_path);
+                    XmlNodeList CNodes = xmldoc.GetElementsByTagName("user");
+                    foreach (XmlNode node in CNodes)
+                    {
+                        XmlNodeList events = node.ChildNodes;
+                        if (events.Item(3).InnerText.Equals(TextBox4.Text))
+                        {
+                            if (events.Item(1).InnerText == "true")
+                            {
+                                System.Web.UI.ScriptManager.RegisterStartupScript(this, GetType(), "clientdisabled", "alert('Member Already Enabled');", true);
+
+                            }
+                            else
+                            {
+                                events.Item(1).InnerText = "true";
+                                xmldoc.Save(Path.Combine(App_Data_Path, @"users.xml"));
+                                System.Web.UI.ScriptManager.RegisterStartupScript(this, GetType(), "clientdisabled", "alert('Member Enabled');", true);
+                            }
+
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (!found)
+                        System.Web.UI.ScriptManager.RegisterStartupScript(this, GetType(), "22", "alert('No user with given email. Please enter proper email !');", true);
+
+                }
+                else
+                {
+                    Console.WriteLine("File doesn't exist \n");
+                }
+            }
+
+            catch (XmlException e1)
+            {
+                Console.WriteLine(e1.Message);
+            }
         }
 
         

@@ -22,6 +22,15 @@ namespace EventManagement.UserRoles.UserPages {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
+        /// SemesterDetailsFragmentLogin control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::EventManagement.UserControl.SemesterDetails SemesterDetailsFragmentLogin;
+        
+        /// <summary>
         /// ResultLogin control.
         /// </summary>
         /// <remarks>
@@ -76,6 +85,15 @@ namespace EventManagement.UserRoles.UserPages {
         protected global::System.Web.UI.WebControls.TextBox TextBox1;
         
         /// <summary>
+        /// SmsLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label SmsLabel;
+        
+        /// <summary>
         /// Panel4 control.
         /// </summary>
         /// <remarks>
@@ -85,13 +103,13 @@ namespace EventManagement.UserRoles.UserPages {
         protected global::System.Web.UI.WebControls.Panel Panel4;
         
         /// <summary>
-        /// SmsLabel control.
+        /// SubjectBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label SmsLabel;
+        protected global::System.Web.UI.WebControls.TextBox SubjectBox;
         
         /// <summary>
         /// Label5 control.
@@ -146,14 +164,5 @@ namespace EventManagement.UserRoles.UserPages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label1;
-        
-        /// <summary>
-        /// SemesterDetailsFragmentLogin control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::EventManagement.UserControl.SemesterDetails SemesterDetailsFragmentLogin;
     }
 }

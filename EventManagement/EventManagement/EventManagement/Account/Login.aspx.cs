@@ -2,7 +2,7 @@
 using System.Web;
 using System.Web.UI;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
+using Microsoft.AspNet.Identity.Owin;   
 using Owin;
 using EventManagement.Models;
 using System.IO;
@@ -17,6 +17,7 @@ namespace EventManagement.Account
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            //Taking the user role to be able to select the specific user xml file
             String userRole = Request.QueryString["PageName"];
             RegisterHyperLink.NavigateUrl = "/Account/Register.aspx?PageName=" + "register";
 
@@ -24,20 +25,23 @@ namespace EventManagement.Account
             {
                 if (userRole.Contains("MemberLogin"))
                 {
+                    //Setting the lable on aspx page for the particular user
                     LoginPageId.InnerText = "Log in to access Member Page";
                 }
                 else
                 {
                     //Session["AdminDetails1"] = Application["AdminDetailsUser"].ToString();
                     //Session["AdminDetails2"] = Application["AdminDetailsUserPassword"].ToString();
-                    AdminUserName.Text = "AdminName: "+Application["AdminDetailsUser"].ToString();
-                    AdminPassword.Text = "AdminPassword: " +Application["AdminDetailsUserPassword"].ToString();
+                    ProviderLabel.Text = "  <p><b> Provider:</b>Akhila <br/> <b>Functionality Name: </b> Global asax <br /> <b> Functionality Description: </b> This feature is used in the application to print the details of the TA admin login only on the admin page not on the member page <br /></p>";
+                    AdminUserName.Text = "<h4>"+ "AdminName:" + Application["AdminDetailsUser"].ToString();
+                    AdminPassword.Text = "<h4> AdminPassword:" + Application["AdminDetailsUserPassword"].ToString();
                     LoginPageId.InnerText = "Log in to access Admin Page";
                 }
 
             }
             else
             {
+                //If the user role is null redirecting to the default page
                 Response.Redirect("~/Default.aspx");
             }
         }
@@ -46,6 +50,7 @@ namespace EventManagement.Account
         {
             if (!String.IsNullOrWhiteSpace(userEmail.Text) && !String.IsNullOrWhiteSpace(Password.Text)) 
             {
+                //Using cookie to remeber the user
                 HttpCookie CookieVar = new HttpCookie("UserSessionCookie");
                 string sessionResult = accessingUser(userEmail.Text, Password.Text);
                 String userRole = Request.QueryString["PageName"];
@@ -56,6 +61,7 @@ namespace EventManagement.Account
                     {
                         if (sessionResult.Equals("Login successful"))
                         {
+                            //If the login is successful storing the useremai
                             CookieVar["UserSessionCookie"] = userEmail.Text;
 
                             CookieVar.Expires = DateTime.Now.AddMonths(6);
@@ -78,7 +84,7 @@ namespace EventManagement.Account
                             Response.Cookies.Add(CookieVar);
                             FormsAuthentication.SetAuthCookie(sessionResult, rememberme.Checked);
                             FormsAuthentication.RedirectFromLoginPage(sessionResult, rememberme.Checked);
-                            Response.Redirect("/UserRoles/StaffPages/Admin.aspx?PageName=" + "AdminFeed");
+                            Response.Redirect("/UserRoles/StaffPages/StaffPages.aspx?PageName=" + "AdminFeed");
                         }
                         else
                         {
@@ -103,6 +109,7 @@ namespace EventManagement.Account
             String userRole = Request.QueryString["PageName"];
             string App_Data_Path = Path.Combine(HttpRuntime.AppDomainAppPath, @"XMLFiles");
 
+            //Checking the user role to select the correct xml file
             if (userRole.Contains("MemberLogin"))
             {
                 Session.Remove("SessionVar");
@@ -134,11 +141,15 @@ namespace EventManagement.Account
                     XmlNodeList UserList = xn.SelectNodes("user");
                     foreach (XmlNode node in UserList)
                     {
+                        //Getting the user details
                         string useremail_fromxml = node["email"].InnerText.Trim().Replace("\r\n", string.Empty);
                         string password_fromxml = node["password"].InnerText.Trim().Replace("\r\n", string.Empty);
                         string enabled_fromxml = node["enabled"].InnerText.Trim().Replace("\r\n", string.Empty);
+
+                        //Decrypting the encrypted password in the xml using DLL class
                         string DecryptedPassword = Class1.Decrypt(password_fromxml);
 
+                        //Checking if the user logging in is present in the users.xml file
                         if (useremail_fromxml.Equals(userEmail))
                         {
                             if (DecryptedPassword.Equals(Password))
